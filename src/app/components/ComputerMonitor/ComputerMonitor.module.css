@@ -1,0 +1,642 @@
+.computerContainer {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  perspective: 1000px;
+}
+
+.monitor {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* 4:3 aspect ratio */
+  transform-style: preserve-3d;
+  
+}
+
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  border: 2px solid #222;
+  padding: 15px;
+  transform-style: preserve-3d;
+  transform: rotateX(5deg);
+  
+}
+
+.screenContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: opacity 0.2s ease;
+  
+}
+
+.powered {
+  background: radial-gradient(circle, #2d3748 0%, #1a202c 100%);
+}
+
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.05) 50%
+  );
+  background-size: 100% 2px;
+  
+  z-index: 2;
+}
+
+.screenReflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  
+  z-index: 3;
+}
+
+.stand {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20%;
+  height: 15%;
+  background-color: #222;
+  clip-path: polygon(30% 0, 70% 0, 80% 100%, 20% 100%);
+}
+
+.base {
+  position: absolute;
+  bottom: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 5%;
+  background: linear-gradient(to bottom, #333, #111);
+  border-radius: 50% / 40%;
+}
+
+.controls {
+  position: absolute;
+  bottom: -12%;
+  right: 10%;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.powerButton {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #333;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.powerButton.active {
+  background-color: var(--accent-color, #64ffda);
+  box-shadow: 0 0 15px var(--accent-color, #64ffda);
+}
+
+.powerIcon {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  position: relative;
+}
+
+.powerIcon::after {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 7px;
+  background-color: #fff;
+}
+
+.projectControls {
+  display: flex;
+  gap: 5px;
+}
+
+.projectButton {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #333;
+  border: none;
+  color: #aaa;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.projectButton.active {
+  background-color: var(--accent-color, #64ffda);
+  color: #000;
+  box-shadow: 0 0 8px var(--accent-color, #64ffda);
+}
+
+.projectButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Browser window styling */
+.browserWindow {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.browserFrame {
+  position: absolute;
+  top: 34px; /* Below the top bar */
+  left: 20px;
+  right: 20px;
+  bottom: 80px; /* Leave space for dock */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  z-index: 9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 200, 255, 0.3);
+  border: 1px solid rgba(100, 200, 255, 0.4);
+  animation: appearAnimation 0.5s ease;
+}
+
+@keyframes appearAnimation {
+  from { 
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.browserHeader {
+  height: 35px;
+  background: linear-gradient(to right, #1a1a2e, #16213e);
+  border-bottom: 1px solid #30475e;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.browserControls {
+  display: flex;
+  gap: 6px;
+  margin-right: 15px;
+}
+
+.browserControls span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.browserControls span:hover {
+  transform: scale(1.2);
+}
+
+.browserControls span:first-child {
+  background-color: #ff5f56;
+}
+
+.browserControls span:nth-child(2) {
+  background-color: #ffbd2e;
+}
+
+.browserControls span:nth-child(3) {
+  background-color: #27c93f;
+}
+
+.browserUrl {
+  flex: 1;
+  height: 24px;
+  background-color: rgba(30, 40, 60, 0.8);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: #a0e4ff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.browserContent {
+  flex: 1;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.fallbackPreview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  color: #333;
+  text-align: center;
+}
+
+/* Glitch effect when the screen has some "interference" */
+.glitch {
+  animation: glitchEffect 0.3s linear;
+}
+
+@keyframes glitchEffect {
+  0% { transform: translate(0); }
+  20% { transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
+  40% { transform: translate(5px, -5px); filter: hue-rotate(-90deg); }
+  60% { transform: translate(0); filter: hue-rotate(0); }
+  80% { transform: translate(3px, -3px); filter: hue-rotate(45deg); }
+  100% { transform: translate(0); }
+}
+
+/* Styles for iframe and website preview container */
+.iframeContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.websiteIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  position: relative;
+  z-index: 2;
+}
+
+.iframeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeIframeButton {
+  background-color: #ff5f56;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.closeIframeButton:hover {
+  transform: scale(1.05);
+  background-color: #ff4141;
+}
+
+/* New Mac desktop UI styles with sci-fi theme */
+.macTopBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+  box-shadow: 0 1px 8px rgba(0, 150, 255, 0.5);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  color: #a0e4ff;
+  font-size: 12px;
+  z-index: 5;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.sciFiTopBar {
+  border-bottom: 1px solid rgba(0, 200, 255, 0.3);
+}
+
+.macLogo {
+  margin-right: 12px;
+  font-weight: bold;
+  color: #64ffda;
+  text-shadow: 0 0 5px rgba(100, 255, 218, 0.8);
+}
+
+.macMenuItems {
+  display: flex;
+  gap: 15px;
+}
+
+.macMenuItems span {
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  cursor: default;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.macMenuItems span:hover {
+  opacity: 1;
+  color: #64ffda;
+}
+
+.macStatusIcons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.macTime {
+  font-weight: 500;
+  color: #64ffda;
+}
+
+.macDesktop {
+  position: absolute;
+  top: 34px;
+  left: 10px;
+  right: 10px;
+  bottom: 80px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.desktopIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.desktopIcon:hover {
+  transform: scale(1.05);
+  background-color: rgba(100, 200, 255, 0.1);
+  box-shadow: 0 0 10px rgba(100, 200, 255, 0.3);
+}
+
+.desktopIconImage {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.5));
+}
+
+.desktopLabel {
+  color: #a0e4ff;
+  font-size: 12px;
+  text-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
+  text-align: center;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.macDock {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  background: rgba(20, 30, 50, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 8px 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 200, 255, 0.3);
+  z-index: 10;
+  border: 1px solid rgba(100, 200, 255, 0.3);
+}
+
+.sciFiDock {
+  background: linear-gradient(180deg, rgba(20, 30, 50, 0.8) 0%, rgba(10, 20, 40, 0.9) 100%);
+}
+
+.appIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.appIcon:hover {
+  transform: translateY(-8px) scale(1.1);
+}
+
+.appIconImage {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.appIconFallback {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0, 150, 255, 0.5);
+  position: relative;
+}
+
+.appIconDot {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #64ffda;
+  box-shadow: 0 0 5px rgba(100, 255, 218, 0.8);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.activeApp .appIconDot {
+  opacity: 1;
+}
+
+.appIcon:hover .appIconDot {
+  opacity: 1;
+}
+
+.appLabel {
+  font-size: 11px;
+  color: #a0e4ff;
+  margin-top: 5px;
+  text-shadow: 0 0 5px rgba(0, 150, 255, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70px;
+  text-align: center;
+}
+
+.appIcon:hover .appLabel {
+  opacity: 1;
+}
+
+.activeApp {
+  transform: scale(1.05);
+}
+
+.activeApp .appIconImage,
+.activeApp .appIconFallback {
+  box-shadow: 0 0 10px rgba(100, 255, 218, 0.8);
+}
+
+.loadingBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #64ffda 0%, #0072ff 50%, #64ffda 100%);
+  animation: loadingAnimation 1.5s infinite ease-in-out;
+  width: 100%;
+  z-index: 10;
+  background-size: 200% 100%;
+}
+
+@keyframes loadingAnimation {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .closeIframeButton {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+  
+  .macDesktop {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .desktopIconImage {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .desktopLabel {
+    font-size: 10px;
+  }
+  
+  .macTopBar {
+    height: 20px;
+    font-size: 10px;
+  }
+  
+  .browserFrame {
+    top: 30px;
+    left: 10px;
+    right: 10px;
+    bottom: 70px;
+  }
+  
+  .macDock {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  
+  .appIconImage,
+  .appIconFallback {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (width < 768px){
+  .terminalNav{
+    display: none;
+  }
+}

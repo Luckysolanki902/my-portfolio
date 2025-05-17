@@ -1,0 +1,228 @@
+.contact {
+  width: 100%;
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.sectionHeader {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  color: var(--foreground);
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+}
+
+.blink {
+  animation: cursorBlink 1s infinite;
+  opacity: 0;
+}
+
+.contactContent {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.infoItem h3 {
+  font-size: 1.7rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.infoItem h4 {
+  font-size: 1.2rem;
+  color: var(--foreground);
+  margin-bottom: 0.8rem;
+}
+
+.infoItem p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.contactLink {
+  color: var(--foreground);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.contactLink:hover {
+  color: var(--accent);
+}
+
+.contactLink::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background: var(--accent);
+  transition: all 0.3s ease;
+}
+
+.contactLink:hover::after {
+  width: 100%;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.socialLink {
+  color: var(--foreground);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.socialLink:hover {
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--foreground-dim);
+  border-radius: 5px;
+  position: relative;
+}
+
+.contactForm::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--foreground) 0%, var(--accent) 100%);
+  box-shadow: 0 0 8px var(--foreground);
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formControl label {
+  font-size: 0.9rem;
+  color: var(--foreground);
+}
+
+.formControl input,
+.formControl textarea {
+  padding: 0.8rem 1rem;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--foreground-dim);
+  border-radius: 3px;
+  color: var(--foreground);
+  font-family: var(--font-mono);
+  resize: none;
+  transition: all 0.3s ease;
+}
+
+.formControl input:focus,
+.formControl textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+.submitButton {
+  padding: 0.8rem 1.5rem;
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--foreground);
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loadingSpinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 255, 156, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--foreground);
+  animation: spin 1s ease-in-out infinite;
+}
+
+.formMessage {
+  padding: 0.8rem;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.success {
+  background-color: rgba(0, 255, 156, 0.1);
+  border: 1px solid var(--foreground);
+  color: var(--foreground);
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff0033;
+  color: #ff0033;
+}
+
+.sectionFooter {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .contactContent {
+    grid-template-columns: 1fr;
+  }
+}

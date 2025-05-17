@@ -1,0 +1,105 @@
+.footer {
+  background-color: var(--background);
+  border-top: 1px solid var(--foreground-dim);
+  padding: 3rem 0 0;
+  margin-top: 4rem;
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+
+.footerLogo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--foreground);
+  text-shadow: 0 0 8px var(--foreground);
+}
+
+.slash {
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent);
+}
+
+.footerLinks {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.socialLink {
+  color: var(--foreground);
+  text-decoration: none;
+  position: relative;
+  padding: 0.2rem 0;
+  transition: all 0.3s ease;
+}
+
+.socialLink:hover {
+  color: var(--accent);
+  text-shadow: 0 0 5px var(--accent);
+}
+
+.socialLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 5px var(--accent);
+}
+
+.socialLink:hover::after {
+  width: 100%;
+}
+
+.copyright {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--foreground-dim);
+}
+
+.hackerNote {
+  opacity: 0.7;
+}
+
+.commandLine {
+  background-color: var(--terminal-bg);
+  padding: 1rem 2rem;
+  font-family: var(--font-mono);
+  border-top: 1px solid var(--foreground-dim);
+}
+
+.prompt {
+  color: var(--foreground);
+  margin-right: 1rem;
+}
+
+.result {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .footerLinks {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

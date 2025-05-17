@@ -1,0 +1,667 @@
+/* Safari.module.css - Consolidated Safari browser styling */
+
+/* Basic browser styling */
+.safari {
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  transform-origin: center center;
+  animation: safariAppear 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+             safariShadowAppear 0.6s ease forwards;
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+              z-index: 10;
+}
+
+.closing {
+  animation: safariDisappear 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Safari header styling */
+.header {
+  background: linear-gradient(145deg, #f7f7f7, #efefef);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  user-select: none;
+}
+
+.header:hover {
+  background: linear-gradient(145deg, #fcfcfc, #f6f6f6);
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  margin-right: 12px;
+  padding-left: 6px;
+}
+
+.trafficLight {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transition: all 0.15s ease;
+  position: relative;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.15) inset;
+  cursor: pointer;
+}
+
+.close {
+  background-color: #ff5f56;
+  border: 1px solid rgba(224, 68, 62, 0.5);
+}
+
+.minimize {
+  background-color: #ffbd2e;
+  border: 1px solid rgba(223, 167, 47, 0.5);
+}
+
+.maximize {
+  background-color: #27c93f;
+  border: 1px solid rgba(31, 177, 50, 0.5);
+}
+
+
+
+
+/* Address bar styling */
+.addressBar {
+  flex: 1;
+  height: 24px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  border: 1px solid #d1d1d1;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: #333;
+  font-size: 12px;
+  margin: 0 8px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.secure {
+  color: #4CAF50;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.urlContainer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+.urlIcon {
+  color: #666;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-size: 11px;
+}
+
+/* Safari browser icons */
+.icons {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.icon {
+  color: #666;
+  background: transparent;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  padding: 6px;
+  margin-left: 4px;
+}
+
+.icon svg {
+  transition: all 0.2s ease;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.fullscreenButton {
+  color: #27c93f;
+}
+
+.fullscreenButton:hover {
+  background-color: rgba(39, 201, 63, 0.1);
+  transform: translateY(-1px);
+}
+
+.fullscreenButton:active {
+  transform: translateY(1px);
+}
+
+.closeButton {
+  color: #e74c3c;
+}
+
+.closeButton:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+  transform: translateY(-1px);
+}
+
+.closeButton:active {
+  transform: translateY(1px);
+}
+
+/* Safari content */
+.content {
+  flex: 1;
+  height: calc(100% - 38px);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 11;
+  pointer-events: auto; /* Ensure content receives pointer events */
+}
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.loading:after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  border-top-color: #2196F3;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Project display */
+.projectDisplay {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  overflow: hidden;
+  z-index: 12;
+  pointer-events: auto; /* Ensure project display receives pointer events */
+  position: relative; /* Establish stacking context */
+}
+
+.projectInfo {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  position: relative; /* Ensure proper stacking context */
+}
+
+.projectTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin: 8px 0;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.projectDivider {
+  width: 40px;
+  height: 2px;
+  background-color: #2196F3;
+  margin: 5px auto 10px;
+}
+
+.projectDescription {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.projectImage {
+  width: auto;
+  height: auto;
+  max-height: 150px;
+  max-width: 85%;
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px;
+  max-height: 150px;
+  overflow: hidden;
+}
+
+/* Tech badges */
+.projectTech {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin: 5px 0;
+}
+
+.techBadge {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-size: 0.65rem;
+  color: #555;
+  gap: 4px;
+}
+
+.techIcon {
+  display: flex;
+  align-items: center;
+}
+
+/* Project buttons */
+.projectButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  z-index: 100; /* Increased z-index for better clickability */
+  pointer-events: all;
+  position: relative; /* Added position relative */
+  cursor: pointer;
+}
+
+.projectButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 101; /* Increased z-index from 31 to 101 */
+  pointer-events: auto; /* Explicitly enable pointer events */
+  text-decoration: none; /* Remove underline for Link component */
+  color: inherit;
+  touch-action: manipulation; /* Improve touch handling */
+}
+
+.primary {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.buttonText {
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+.buttonGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  animation: shimmer 2s infinite;
+  pointer-events: none; /* Ensures the glow doesn't block clicks */
+  z-index: 1; /* Keep below the button text */
+}
+
+/* Fullscreen mode */
+.fullscreen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1000 !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+.fullscreen .header {
+  border-radius: 0 !important;
+}
+
+.fullscreen .content {
+  border-radius: 0 !important;
+}
+
+/* Minimized mode */
+.minimized {
+  width: 85% !important;
+  height: 75% !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) scale(0.85) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25), 0 5px 15px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  animation: safariMinimize 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.minimized:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25), 0 5px 15px rgba(0, 0, 0, 0.2) !important;
+  animation: safariMinimizePulse 1.5s infinite ease-in-out !important;
+}
+
+.minimized .header {
+  background: linear-gradient(145deg, #f1f1f1, #e6e6e6) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15) !important;
+  height: 28px !important;
+  padding: 0 8px !important;
+}
+
+.minimized .content {
+  height: calc(100% - 28px) !important;
+  max-height: calc(100% - 28px) !important;
+  overflow: hidden !important;
+  justify-content: center !important;
+}
+
+.minimized .projectDisplay {
+  padding: 5px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+.minimized .imageContainer {
+  max-height: 60px !important;
+  margin-bottom: 3px !important;
+}
+
+.minimized .projectImage {
+  max-height: 60px !important;
+  max-width: 85% !important;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.minimized .projectTitle {
+  font-size: 1.2rem !important;
+  margin: 2px 0 !important;
+}
+
+.minimized .projectDivider {
+  margin: 2px auto !important;
+  width: 30px !important;
+  height: 1px !important;
+}
+
+.minimized .projectDescription {
+  max-width: 90% !important;
+  margin: 2px auto !important;
+  font-size: 0.75rem !important;
+  line-height: 1.2 !important;
+  overflow: hidden !important;
+  max-height: 4em !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  box-orient: vertical !important;
+}
+
+.minimized .projectTech {
+  margin: 2px auto !important;
+  transform: scale(0.7) !important;
+  gap: 5px !important;
+}
+
+.minimized .techBadge {
+  margin: 1px 2px !important;
+  padding: 1px 3px !important;
+  font-size: 0.85rem !important;
+}
+
+.minimized .projectButtons {
+  margin-top: 3px !important;
+  transform: scale(0.85) !important;
+}
+
+.minimized .icons {
+  transform: scale(0.85) !important;
+}
+
+.minimized .addressBar {
+  font-size: 10px !important;
+  height: 18px !important;
+  padding: 0 5px !important;
+}
+
+.minimized .trafficLight {
+  width: 8px !important;
+  height: 8px !important;
+  margin-right: 4px !important;
+}
+
+
+
+
+
+/* Minimized indicator dot */
+.minimized::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 5px;
+  height: 5px;
+  background-color: #ffbd2e;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Decorative Elements */
+.decorativeElements {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 0 5px;
+}
+
+.decorativeCircle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  opacity: 0.5;
+}
+
+
+
+/* Animations */
+@keyframes safariAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+    filter: blur(5px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes safariDisappear {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(5px);
+  }
+}
+
+@keyframes safariShadowAppear {
+  from {
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
+  }
+  to {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes safariMinimize {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(0.87);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+}
+
+@keyframes safariMinimizePulse {
+  0% { transform: translate(-50%, -50%) scale(0.85); }
+  50% { transform: translate(-50%, -50%) scale(0.87); }
+  100% { transform: translate(-50%, -50%) scale(0.85); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.7; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+@media (width < 768px){
+  .decorativeElements{
+    display: none;
+  }
+  .projectTitle{
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .projectDescription{
+    font-size: 0.7rem;
+    margin: 0;
+  }
+  .projectInfo{
+    overflow-y: scroll;
+  }
+  .projectInfo::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .projectInfo::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .projectInfo::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+  }
+  
+  .projectInfo::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
