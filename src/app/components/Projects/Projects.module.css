@@ -38,6 +38,12 @@
   justify-content: center;
 }
 
+@media (width < 600px){
+ .computerContainer {
+    display: none;
+  }
+}
+
 .projectsList {
   display: flex;
   flex-direction: column;
